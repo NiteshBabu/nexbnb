@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "name": "cabins",
+    "icon": "material-symbols:cabin-rounded"
+  },
+  {
+    "id": 2,
+    "name": "trending",
+    "icon": "ph:fire-bold"
+  },
+  {
+    "id": 3,
+    "name": "all",
+    "icon": "fluent:notepad-28-regular"
+  },
+  {
+    "id": 4,
+    "name": "castles",
+    "icon": "tdesign:castle-1"
+  },
+  {
+    "id": 5,
+    "name": "rooms",
+    "icon": "cbi:roomsother"
+  },
+  {
+    "id": 6,
+    "name": "tropical",
+    "icon": "fluent-emoji-high-contrast:tropical-drink"
+  },
+  {
+    "id": 7,
+    "name": "beach",
+    "icon": "tabler:beach"
+  },
+  {
+    "id": 8,
+    "name": "bed_and_breakfast",
+    "icon": "material-symbols:bed"
+  },
+  {
+    "id": 9,
+    "name": "country_side",
+    "icon": "game-icons:huts-village"
+  },
+  {
+    "id": 10,
+    "name": "deserts",
+    "icon": "uil:desert"
+  },
+  {
+    "id": 100,
+    "name": "farms",
+    "icon": "mdi:farm"
+  },
+  {
+    "id": 11,
+    "name": "iconic_cities",
+    "icon": "mdi:farm"
+  },
+  {
+    "id": 12,
+    "name": "islands",
+    "icon": "mdi:island"
+  },
+  {
+    "id": 13,
+    "name": "lake_front",
+    "icon": "mdi:lake"
+  },
+  {
+    "id": 14,
+    "name": "luxe",
+    "icon": "mdi:star"
+  },
+  {
+    "id": 15,
+    "name": "national_parks",
+    "icon": "material-symbols:park-rounded"
+  },
+  {
+    "id": 16,
+    "name": "omg",
+    "icon": "cryptocurrency:omg"
+  },
+  {
+    "id": 17,
+    "name": "play",
+    "icon": "cli:bowling"
+  },
+  {
+    "id": 18,
+    "name": "amazing_pools",
+    "icon": "mdi:pool"
+  }
+]
