@@ -1,21 +1,30 @@
-"use client";
-import React from "react";
-import ProfileMenu from "./ProfileMenu";
+'use client'
+import React from 'react'
+import ProfileMenu from './ProfileMenu'
+import Image from 'next/image'
 
-type Props = {};
+type Props = {}
 
 const Header = (props: Props) => {
   return (
-    <header className="flex justify-between">
-      <div className="logo">
-        <img src="images/logo.png" alt="logo" className="w-10" />
-      </div>
-      <div className="flex ">
-        <p className="cursor-not-allowed">NexBnB your home</p>
-        <ProfileMenu />
-      </div>
+    <header className="">
+      <nav className="w-full border-b">
+        <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-5">
+          <div className="flex items-center gap-2">
+            <Image
+              src="/images/logo.png"
+              alt="logo"
+              className="w-10"
+              width={500}
+              height={500}
+            />
+            <p className='text-primary font-extrabold text-lg tracking-wider hidden md:block'>nexbnb</p>
+          </div>
+          <ProfileMenu />
+        </div>
+      </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

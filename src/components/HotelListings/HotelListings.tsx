@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
 import Card from "@/components/HotelListings/HotelListingsCard";
 import Pagination from "../Pagination/Paginaton";
-import FilterList from "./FilterList";
 import { Skeleton } from "../ui/skeleton";
-import useHotels from "./hooks/useHotels";
-import useFilter from "./hooks/useFilter";
 import { getHotelsListings } from "@/lib/getHotelListings";
+import { NoItem } from "../NoItem";
 
-// const hotels: IHotel[] = JSON.parse(hotelsJson)
-// const hotels: IHotel[] = await getHotelsListings()
-// const hotelsJson = hotelsJso.slice(0, 30)
 async function HotelListings({ category, per_page, page_no }) {
   let { hotels, totalPage } = await getHotelsListings(
     category,
@@ -17,6 +11,10 @@ async function HotelListings({ category, per_page, page_no }) {
     page_no
   );
 
+
+  if(hotels.length <= 0){
+    return <NoItem title="Oops! No listings found for this category" description="Please try something else 😃" />
+  }
   return (
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 justify-items-center">
@@ -43,6 +41,8 @@ async function HotelListings({ category, per_page, page_no }) {
                   <Card key={hotel.id} hotel={hotel} isFetching={isFetching} />
                 );
             })} */}
+
+      
         {hotels.map((hotel) => (
           <Card key={hotel.id} hotel={hotel} />
         ))}

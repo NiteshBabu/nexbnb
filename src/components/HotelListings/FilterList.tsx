@@ -1,64 +1,70 @@
-"use client";
-import React, { useState } from "react";
-import { ScrollItem, Scroller } from "../ui/scroller";
-import filterIcons from "../../data/filters.json";
-import { Icon } from "@iconify/react";
-import { useRouter } from "next/navigation";
-import { Skeleton } from "../ui/skeleton";
+'use client'
+import React, { useCallback, useState } from 'react'
+import { ScrollItem, Scroller } from '../ui/scroller'
+import filterList from '../../data/filters.json'
+import { Icon } from '@iconify/react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Skeleton } from '../ui/skeleton'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import Image from 'next/image'
 
 function FilterList() {
-  const router = useRouter();
+  const router = useRouter()
 
   // const pageItemCount = 8
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(false)
   // const [currentPage, setCurrentPage] = useState(1)
   // const [pageCount, setPageCount] = useState<number | null>(null)
   // const [hasNextPage, setHasNextPage] = useState(false)
   // const [hasPrevPage, setHasPrevPage] = useState(false)
+  const searchParams = useSearchParams()
+  const search = searchParams.get('category')
+  const pathname = usePathname()
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
   return (
-    <>
-      <Scroller className="my-5 py-2">
-        {filterIcons.map((filterIcon) => (
-          <ScrollItem
+    <Scroller className="my-5 py-2 no-scrollbar container">
+      {filterList.map((filterIcon) => (
+        <ScrollItem key={filterIcon.id}>
+          <Link
             key={filterIcon.id}
-            className="flex flex-col items-center gap-1 cursor-pointer min-w-[150px]"
-            onClick={() => {
-              router.push(`?category=${filterIcon.name}&per_page=8&page_no=1`);
-              setIsFetching(true);
-              setTimeout(() => setIsFetching(false), 10000);
-            }}
+            href={
+              pathname + '?' + createQueryString('category', filterIcon.name)
+            }
+            className={cn(
+              search === filterIcon.name
+                ? 'border-b-2 border-black pb-2 flex-shrink-0'
+                : 'opacity-70 flex-shrink-0',
+              'flex flex-col gap-y-3 items-center'
+            )}
           >
-            <Icon icon={filterIcon.icon} className="h-10 w-20" />
-            <small>
-              {filterIcon.name
-                .split("_")
-                .map((item) => {
-                  return item.charAt(0).toUpperCase() + item.slice(1);
-                })
-                .join(" ")}
-            </small>
-          </ScrollItem>
-        ))}
-      </Scroller>
-      {/* {isFetching && (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
-          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((_, indx) => (
-            <div key={indx} className="flex flex-col h-full w-full">
-              <Skeleton className="w-full h-[250px]" />
-
-              <div className="flex justify-between py-2">
-                <Skeleton className="w-9/12 h-5" />
-                <Skeleton className="w-2/12 h-5" />
-              </div>
-              <Skeleton className="w-full h-10 my-1" />
-              <Skeleton className="w-1/3 h-5 my-1" />
+            <div className="relative w-5 h-5">
+              <Icon icon={filterIcon.icon} className="h-5 w-5" />
             </div>
-          ))}
-        </div>
-      )} */}
-    </>
-  );
+            <small className="text-[13px]">
+              {filterIcon.name
+                .split('_')
+                .map((item) => {
+                  return item.charAt(0).toUpperCase() + item.slice(1)
+                })
+                .join(' ')}
+            </small>
+          </Link>
+        </ScrollItem>
+      ))}
+    </Scroller>
+  )
 }
 
-export default FilterList;
+export default FilterList
+
