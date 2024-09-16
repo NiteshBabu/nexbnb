@@ -1,4 +1,3 @@
-import SignupForm from "@/components/Forms/SignupForm";
 import Header from "@/components/Header/Header";
 import FilterList from "@/components/HotelListings/FilterList";
 import HotelListings from "@/components/HotelListings/HotelListings";
