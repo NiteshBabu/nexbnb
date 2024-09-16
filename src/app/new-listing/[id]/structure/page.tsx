@@ -1,3 +1,4 @@
+import { createCategoryPage } from "@/lib/actions";
 import { SelectedCategory } from "@/components/NewListing/SelectedCategory";
 import { NewListingBottomBar } from "@/components/NewListing/NewListingBottomBar";
 
@@ -10,9 +11,8 @@ export default function StrucutreRoute({ params }: { params: { id: string } }) {
         </h2>
       </div>
 
-      {/* Todo : Create Category Page action */}
 
-      <form action={"createCategoryPage"}>
+      <form action={createCategoryPage}>
         <input type="hidden" name="homeId" value={params.id} />
         <SelectedCategory />
         <NewListingBottomBar />
