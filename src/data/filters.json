@@ -36,8 +36,8 @@
   },
   {
     "id": 8,
-    "name": "bed_and_breakfast",
-    "icon": "material-symbols:bed"
+    "name": "amazing_pools",
+    "icon": "mdi:pool"
   },
   {
     "id": 9,
@@ -91,7 +91,8 @@
   },
   {
     "id": 18,
-    "name": "amazing_pools",
-    "icon": "mdi:pool"
+
+    "name": "bed_and_breakfast",
+    "icon": "material-symbols:bed"
   }
 ]
