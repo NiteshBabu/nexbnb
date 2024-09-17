@@ -10,7 +10,7 @@ export function SelectedCategory() {
     undefined
   )
   return (
-    <div className="grid grid-cols-4 gap-8 mt-10 w-3/5 mx-auto mb-36">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10 lg:w-3/5 mx-auto mb-36">
       <input
         type="hidden"
         name="categoryName"
@@ -23,10 +23,10 @@ export function SelectedCategory() {
             onClick={() => setSelectredCategory(item.name)}
           >
             <CardHeader>
-              <div className="relative w-5 h-5">
-                <Icon icon={item.icon} className="h-5 w-5" />
+              <div className="h-14">
+                <Icon icon={item.icon} className='text-[30px] md:text-[40px] lg:text-[50px]' />
               </div>
-              <h3 className="font-medium">{item.name}</h3>
+              <h3 className="font-medium text-sm md:text-md">{item.title}</h3>
             </CardHeader>
           </Card>
         </div>

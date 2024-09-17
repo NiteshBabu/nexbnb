@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
+import { Toaster } from '@/components/ui/toaster'
+import Header from '@/components/Header/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +20,11 @@ const RootLayout = ({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className + ' px-10 mx-auto'}>{children}</body>
+        <body className={inter.className + ' px-10 mx-auto'}>
+          <Header />
+          <main>{children}</main>
+          <Toaster />
+        </body>
       </html>
     </ClerkProvider>
   )

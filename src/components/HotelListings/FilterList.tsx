@@ -51,14 +51,7 @@ function FilterList() {
             <div className="relative w-5 h-5">
               <Icon icon={filterIcon.icon} className="h-5 w-5" />
             </div>
-            <small className="text-[13px]">
-              {filterIcon.name
-                .split('_')
-                .map((item) => {
-                  return item.charAt(0).toUpperCase() + item.slice(1)
-                })
-                .join(' ')}
-            </small>
+            <small className="text-[13px]">{filterIcon.title}</small>
           </Link>
         </ScrollItem>
       ))}
@@ -67,4 +60,3 @@ function FilterList() {
 }
 
 export default FilterList
-

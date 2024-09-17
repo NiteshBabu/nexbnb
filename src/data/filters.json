@@ -2,97 +2,116 @@
   {
     "id": 1,
     "name": "cabins",
+    "title": "Cabins",
     "icon": "material-symbols:cabin-rounded"
   },
   {
     "id": 2,
     "name": "trending",
+    "title": "Trending",
     "icon": "ph:fire-bold"
   },
   {
     "id": 3,
     "name": "all",
+    "title": "All",
     "icon": "fluent:notepad-28-regular"
   },
   {
     "id": 4,
     "name": "castles",
+    "title": "Castles",
     "icon": "tdesign:castle-1"
   },
   {
     "id": 5,
     "name": "rooms",
+    "title": "Rooms",
     "icon": "cbi:roomsother"
   },
   {
     "id": 6,
     "name": "tropical",
+    "title": "Tropical",
     "icon": "fluent-emoji-high-contrast:tropical-drink"
   },
   {
     "id": 7,
     "name": "beach",
+    "title": "Beach",
     "icon": "tabler:beach"
   },
   {
     "id": 8,
     "name": "amazing_pools",
+    "title": "Amazing Pools",
     "icon": "mdi:pool"
   },
   {
     "id": 9,
     "name": "country_side",
+    "title": "Country Side",
     "icon": "game-icons:huts-village"
   },
   {
     "id": 10,
     "name": "deserts",
+    "title": "Deserts",
     "icon": "uil:desert"
   },
   {
     "id": 100,
     "name": "farms",
+    "title": "Farms",
     "icon": "mdi:farm"
   },
   {
     "id": 11,
     "name": "iconic_cities",
+    "title": "Iconic Cities",
     "icon": "mdi:farm"
   },
   {
     "id": 12,
     "name": "islands",
+    "title": "Islands",
     "icon": "mdi:island"
   },
   {
     "id": 13,
     "name": "lake_front",
+    "title": "Lake Front",
     "icon": "mdi:lake"
   },
   {
     "id": 14,
     "name": "luxe",
+    "title": "Luxe",
     "icon": "mdi:star"
   },
   {
     "id": 15,
     "name": "national_parks",
+    "title": "National Parks",
     "icon": "material-symbols:park-rounded"
   },
   {
     "id": 16,
     "name": "omg",
+    "title": "OMG",
     "icon": "cryptocurrency:omg"
   },
   {
     "id": 17,
     "name": "play",
+    "title": "Play",
     "icon": "cli:bowling"
   },
   {
     "id": 18,
 
     "name": "bed_and_breakfast",
+    "title": "Bed & Breakfast",
     "icon": "material-symbols:bed"
   }
 ]

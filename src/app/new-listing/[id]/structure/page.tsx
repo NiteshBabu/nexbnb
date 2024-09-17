@@ -2,7 +2,7 @@ import { createCategoryPage } from "@/lib/actions";
 import { SelectedCategory } from "@/components/NewListing/SelectedCategory";
 import { NewListingBottomBar } from "@/components/NewListing/NewListingBottomBar";
 
-export default function StrucutreRoute({ params }: { params: { id: string } }) {
+export default function StrucutrePage({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="w-3/5 mx-auto">
