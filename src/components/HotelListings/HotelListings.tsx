@@ -22,7 +22,7 @@ async function HotelListings({ category, per_page, page_no }) {
   }
   return (
     <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center min-h-screen">
         <Suspense fallback={<ListingSkeleton />}>
           {hotels.map((hotel) => (
             <Card key={hotel.id} hotel={hotel} />

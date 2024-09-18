@@ -33,7 +33,7 @@ function FilterList() {
     [searchParams]
   )
   return (
-    <Scroller className="my-5 py-2 no-scrollbar container">
+    <Scroller className="my-5 no-scrollbar container">
       {filterList.map((filterIcon) => (
         <ScrollItem key={filterIcon.id}>
           <Link
@@ -51,7 +51,7 @@ function FilterList() {
             <div className="relative w-5 h-5">
               <Icon icon={filterIcon.icon} className="h-5 w-5" />
             </div>
-            <small className="text-[13px]">{filterIcon.title}</small>
+            <small className="text-[13px] text-center">{filterIcon.title}</small>
           </Link>
         </ScrollItem>
       ))}

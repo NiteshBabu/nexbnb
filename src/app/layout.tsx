@@ -20,9 +20,9 @@ const RootLayout = ({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className + ' px-10 mx-auto'}>
+        <body className={inter.className}>
           <Header />
-          <main>{children}</main>
+          <main className=''>{children}</main>
           <Toaster />
         </body>
       </html>

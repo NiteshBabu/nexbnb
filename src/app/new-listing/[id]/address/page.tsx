@@ -16,7 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
-const LazyMap = dynamic(() => import("@/components/NewListing/Map"), {
+const LazyMap = dynamic(() => import("@/components/Map"), {
   ssr: false,
   loading: () => <Skeleton className="h-[50vh] w-full" />,
 });

@@ -9,13 +9,15 @@ export default function Home({
   searchParams: { category, per_page, page_no },
 }: Props) {
   return (
-    <main className="" suppressHydrationWarning>
+    <>
       <FilterList />
+      <div className="container">
         <HotelListings
           category={category || 'all'}
           per_page={per_page || 8}
           page_no={page_no || 1}
         />
-    </main>
+      </div>
+    </>
   )
 }

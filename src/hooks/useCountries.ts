@@ -15,9 +15,13 @@ export const useCountries = () => {
   const getCountryByCountryCode = (countryCode: string) => {
     return countriesFormatted.find((item) => item.countryCode === countryCode);
   };
+  const getCountryByCountryName = (name: string) => {
+    return countriesFormatted.find((item) => item.label === name);
+  };
 
   return {
     getAllCountries,
     getCountryByCountryCode,
+    getCountryByCountryName,
   };
 };
