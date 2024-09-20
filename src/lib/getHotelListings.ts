@@ -1,20 +1,31 @@
 import hotelsJson from '../data/hotels.json'
 import prisma from './db'
 
-export const getHotelsListings = async (category, per_page, page_no) => {
+export const getHotelsListings = async (
+  category,
+  per_page,
+  page_no,
+  country,
+  guests,
+  bedrooms,
+  bathrooms
+) => {
   let hotels = await prisma.home.findMany({
     where: {
       categoryName: category === 'all' ? undefined : category,
+      Location: {
+        code: country ?? undefined,
+      },
+     
     },
   })
-
   // let hotels = hotelsJson.filter((hotel) =>
   //   category === 'all' ? hotel : hotel.category === category
   // )
 
   const totalPage = Math.ceil(hotels.length / per_page)
-
   hotels = hotels.slice((page_no - 1) * per_page, page_no * per_page)
+
   return {
     hotels,
     totalPage,

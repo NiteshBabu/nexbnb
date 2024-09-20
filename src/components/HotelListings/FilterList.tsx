@@ -13,25 +13,25 @@ function FilterList() {
   const router = useRouter()
 
   // const pageItemCount = 8
-  const [isFetching, setIsFetching] = useState(false)
   // const [currentPage, setCurrentPage] = useState(1)
   // const [pageCount, setPageCount] = useState<number | null>(null)
   // const [hasNextPage, setHasNextPage] = useState(false)
   // const [hasPrevPage, setHasPrevPage] = useState(false)
   const searchParams = useSearchParams()
-  const search = searchParams.get('category')
+  const category = searchParams.get('category')
   const pathname = usePathname()
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString())
-
+      params.set('page_no', '1')
       params.set(name, value)
 
       return params.toString()
     },
     [searchParams]
   )
+
   return (
     <div className="sticky top-[91px] z-50 ">
       <Scroller className="py-5 no-scrollbar container bg-white">
@@ -39,11 +39,12 @@ function FilterList() {
           <ScrollItem key={filterIcon.id}>
             <Link
               key={filterIcon.id}
-              href={
-                pathname + '?' + createQueryString('category', filterIcon.name)
-              }
+              href={`${pathname}?${createQueryString(
+                'category',
+                filterIcon.name
+              )}`}
               className={cn(
-                search === filterIcon.name
+                category === filterIcon.name
                   ? 'border-b-2 border-black pb-2 flex-shrink-0'
                   : 'opacity-70 flex-shrink-0',
                 'flex flex-col gap-y-3 items-center'

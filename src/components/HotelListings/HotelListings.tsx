@@ -33,8 +33,8 @@ async function HotelListings({
     )
   }
   return (
-    <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center min-h-screen">
+    <div className="relative">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
         <Suspense fallback={<ListingSkeleton />}>
           {hotels.map((hotel) => (
             <Card key={hotel.id} hotel={hotel} />
