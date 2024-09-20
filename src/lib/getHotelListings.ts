@@ -1,3 +1,4 @@
+import { currentUser } from '@clerk/nextjs/server'
 import hotelsJson from '../data/hotels.json'
 import prisma from './db'
 
@@ -10,14 +11,23 @@ export const getHotelsListings = async (
   bedrooms,
   bathrooms
 ) => {
+
+  const user = await currentUser()
+
   let hotels = await prisma.home.findMany({
     where: {
       categoryName: category === 'all' ? undefined : category,
       Location: {
         code: country ?? undefined,
       },
-     
     },
+    include : {
+      Favorite : {
+        where : {
+          userId : user?.id ?? null
+        }
+      }
+    }
   })
   // let hotels = hotelsJson.filter((hotel) =>
   //   category === 'all' ? hotel : hotel.category === category

@@ -4,6 +4,7 @@ import { Skeleton } from '../ui/skeleton'
 import { getHotelsListings } from '@/lib/getHotelListings'
 import { NoItem } from '../NoItem'
 import { Suspense } from 'react'
+import { currentUser } from '@clerk/nextjs/server'
 
 async function HotelListings({
   category,
@@ -24,6 +25,8 @@ async function HotelListings({
     bathrooms
   )
 
+  const user = await currentUser()
+
   if (hotels.length <= 0) {
     return (
       <NoItem
@@ -37,7 +40,7 @@ async function HotelListings({
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center">
         <Suspense fallback={<ListingSkeleton />}>
           {hotels.map((hotel) => (
-            <Card key={hotel.id} hotel={hotel} />
+            <Card key={hotel.id} hotel={hotel} userId={user?.id} />
           ))}
         </Suspense>
       </div>

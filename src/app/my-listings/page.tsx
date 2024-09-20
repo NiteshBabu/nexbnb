@@ -19,8 +19,14 @@ export default async function MyListings() {
     orderBy: {
       createdAT: 'desc',
     },
+    include: {
+      Favorite: {
+        where: {
+          userId: user.id,
+        },
+      },
+    },
   })
-
 
   return (
     <section className="container my-5">
@@ -29,11 +35,18 @@ export default async function MyListings() {
       </h2>
 
       {!homes.length ? (
-        <NoItem title='No Home In Your Listings' description='Please create some first' />
+        <NoItem
+          title="No Home In Your Listings"
+          description="Please create some first"
+        />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
           {homes.map((home) => (
-            <Card home={home} />
+            <Card
+              home={home}
+              userId={user.id}
+             
+            />
           ))}
         </div>
       )}

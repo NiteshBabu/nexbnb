@@ -19,8 +19,10 @@ import { Button } from '../ui/button'
 import { Skeleton } from '../ui/skeleton'
 import { getBlurredUrl } from '@/lib/getImages'
 import Link from 'next/link'
+import { addToFavorite, DeleteFromFavorite } from '@/lib/actions'
+import { AddToFavoriteButton, DeleteFromFavoriteButton } from '../SubmitButtons'
 
-export async function Card({ hotel }: { hotel: IHotel }) {
+export async function Card({ hotel, userId, pathName }: { hotel: IHotel }) {
   // const photos = hotel.photos.split(',')
   // const imagesWithBlurData = await getBlurredUrl([{url : photos[0]}])
   // hotel.photos = [{
@@ -28,22 +30,35 @@ export async function Card({ hotel }: { hotel: IHotel }) {
   //   blurredDataUrl : imagesWithBlurData[0].blurredDataUrl
   // }]
   // console.log(hotel);
-  
-  if (typeof hotel.photos === "string"){
-    
-    hotel.photos = hotel.photos.split(",")
+
+  if (typeof hotel.photos === 'string') {
+    hotel.photos = hotel.photos.split(',')
   }
-    
+  const favoriteId = hotel?.Favorite?.find((h) => h.hotelId === hotel.id)?.id
+  const isInFavoriteList = (hotel?.Favorite?.length as number) > 0 ? true : false
+
   return (
     <BaseCard className="border-none shadow-none w-full">
       <CardContent className="p-0 pb-4 relative ">
-        <Button className="absolute z-20 right-0 top-2  border-none bg-transparent shadow-none rounded-full hover:bg-transparent">
-          <HeartIcon
-            className=" h-6 w-6 hover:fill-[#555] transition-all ease-in-out duration-300"
-            fill="#999"
-            stroke="white"
-          />
-        </Button>
+        {userId && (
+          <div className="z-20 absolute top-2 right-2">
+            {isInFavoriteList ? (
+              <form action={DeleteFromFavorite}>
+                <input type="hidden" name="favoriteId" value={favoriteId} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName ?? "/"} />
+                <DeleteFromFavoriteButton />
+              </form>
+            ) : (
+              <form action={addToFavorite}>
+                <input type="hidden" name="homeId" value={hotel.id} />
+                <input type="hidden" name="userId" value={userId} />
+                <input type="hidden" name="pathName" value={pathName ?? "/"} />
+                <AddToFavoriteButton />
+              </form>
+            )}
+          </div>
+        )}
         <Carousel className="w-full" orientation="horizontal">
           <CarouselContent>
             {/* <Image className="rounded-lg" src="https://placehold.co/600x600.png?text=Nitesh+Babu" width={600} height={600} /> */}
@@ -67,7 +82,11 @@ export async function Card({ hotel }: { hotel: IHotel }) {
                 ) : (
                   <Image
                     className="rounded-xl w-full  object-cover aspect-square"
-                    src={pic.startsWith("http")? pic : `https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${pic}`}
+                    src={
+                      pic.startsWith('http')
+                        ? pic
+                        : `https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${pic}`
+                    }
                     height={350}
                     width={350}
                     loading="lazy"
