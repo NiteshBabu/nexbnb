@@ -25,6 +25,14 @@ async function getData(homeid: string) {
           profileImage: true,
         },
       },
+      Location: {
+        select: {
+          id: true,
+          city: true,
+          lat: true,
+          lng: true,
+        },
+      },
     },
   })
 }
@@ -37,16 +45,24 @@ export default async function HomePage({
   const data = await getData(id)
   const user = await currentUser()
 
+  if (data && typeof data.photos === 'string') {
+    data.photos = data?.photos.split(',')
+  }
+
   return (
-    <div className="w-[75%] mx-auto mt-10 mb-12">
+    <div className="container mx-auto mt-10 mb-12">
       <h1 className="font-medium text-2xl mb-5">{data?.name}</h1>
       <div className="relative h-[550px]">
-        <Image
-          alt="Image of Home"
-          src={data?.photos[0] + '&img_q=highq'}
-          fill
-          className="rounded-lg h-full object-cover w-full"
-        />
+          <Image
+            alt="Image of Home"
+            src={
+              data?.photos[0].startsWith('http')
+                ? data.photos[0] + '&img_q=highq'
+                : `https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${data.photos[0]}`
+            }
+            fill
+            className="rounded-lg h-full object-cover w-full"
+          />
       </div>
 
       <div className="flex justify-between gap-x-24 mt-8">
@@ -72,18 +88,21 @@ export default async function HomePage({
             />
             <div className="flex flex-col ml-4">
               <h3 className="">
-                Hosted by <span className="font-bold">{data?.User?.firstName}</span>
+                Hosted by{' '}
+                <span className="font-bold">{data?.User?.firstName}</span>
               </h3>
             </div>
           </div>
 
           <Separator className="my-5" />
-
-          <CategoryShowcase categoryName={data?.categoryName as string} />
-
+          <div className="grid gap-2">
+            <h3 className="text-xl font-medium">Property Description</h3>
+            <p>{data?.description}</p>
+          </div>
           <Separator className="my-5" />
+          <CategoryShowcase categoryName={data.categoryName as string} />
 
-          <HomeMap locationValue={data?.country} />
+          <HomeMap latLang={[data.Location.lat, data.Location.lng]} />
         </div>
 
         <form action={createReservation}>

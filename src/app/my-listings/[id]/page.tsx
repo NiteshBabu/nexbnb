@@ -19,7 +19,7 @@ async function getData(homeid: string) {
       id: homeid,
     },
     select: {
-      photo: true,
+      photos: true,
       description: true,
       guests: true,
       bedrooms: true,
@@ -59,19 +59,19 @@ export default async function HomePage({
   const user = await currentUser()
 
   return (
-    <div className="w-[75%] mx-auto mt-10 mb-12">
+    <div className="container mx-auto mt-10 mb-12">
       <h1 className="font-medium text-2xl mb-5">{data?.title}</h1>
-      <div className="relative h-[550px]">
+      <div className="relative h-[300px] md:h-[550px]">
         <Image
           alt="Image of Home"
-          src={`https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${data?.photo}`}
+          src={`https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${data?.photos?.split(",")[0]}`}
           fill
           className="rounded-lg h-full object-cover w-full"
         />
       </div>
 
-      <div className="flex justify-between gap-x-24 mt-8">
-        <div className="w-2/3">
+      <div className="flex justify-between gap-x-24 mt-8 flex-col md:flex-row">
+        <div className="w-full md:w-2/3">
           <h3 className="text-xl font-medium">
             {country?.flag} {country?.label} / {country?.region}
           </h3>
@@ -96,19 +96,16 @@ export default async function HomePage({
           </div>
 
           <Separator className="my-7" />
-
+          <div className="grid gap-2">
+            <h3 className="text-xl font-medium">Property Description</h3>
+            <p>{data?.description}</p>
+          </div>
+          <Separator className="my-5" />
           <CategoryShowcase categoryName={data?.categoryName as string} />
-
-          <Separator className="my-7" />
-
-          <p className="text-muted-foreground">{data?.description}</p>
-
-          <Separator className="my-7" />
-
           <HomeMap locationValue={country?.countryCode as string} />
         </div>
 
-        <form action={createReservation}>
+        <form action={createReservation} className=''>
           <input type="hidden" name="homeId" value={id} />
           <input type="hidden" name="userId" value={user?.id} />
 

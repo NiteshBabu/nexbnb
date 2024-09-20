@@ -84,7 +84,7 @@ export async function CreateDescription(formData: FormData) {
       bedrooms: roomNumber,
       bathrooms: bathroomsNumber,
       guests: guestNumber,
-      photo: imageData?.path,
+      photos: imageData?.path,
       addedDescription: true,
     },
   })
@@ -95,6 +95,8 @@ export async function CreateDescription(formData: FormData) {
 export async function createLocation(formData: FormData) {
   const homeId = formData.get('homeId') as string
   const countryCode = formData.get('countryCode') as string
+  const {getCountryByCountryCode} = useCountries()
+  const country = getCountryByCountryCode(countryCode)
   await prisma.home.update({
     where: {
       id: homeId,
@@ -102,6 +104,13 @@ export async function createLocation(formData: FormData) {
     data: {
       addedLocation: true,
       country: countryCode,
+      Location : {
+        create : {
+          code: countryCode,
+          lat:  country?.latLang[0],
+          lng:  country?.latLang[1]
+        }
+      }
     },
   })
   return redirect('/')

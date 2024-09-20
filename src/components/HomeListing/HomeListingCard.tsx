@@ -20,25 +20,9 @@ import Link from 'next/link'
 
 export async function Card({
   home,
-  isFetching,
 }: {
   home
-  isFetching: boolean
 }) {
-  if (isFetching) {
-    return (
-      <div className="flex flex-col h-full w-full">
-        <Skeleton className="w-full h-[250px]" />
-
-        <div className="flex justify-between py-2">
-          <Skeleton className="w-9/12 h-5" />
-          <Skeleton className="w-2/12 h-5" />
-        </div>
-        <Skeleton className="w-full h-10 my-1" />
-        <Skeleton className="w-1/3 h-5 my-1" />
-      </div>
-    )
-  }
 
   return (
     <Link href={`/my-listings/${home.id}`} className="w-full">
@@ -53,9 +37,9 @@ export async function Card({
           </Button>
           <Carousel className="w-full" orientation="horizontal">
             <CarouselContent>
-              {home.photos.map((photo) => (
+              {home.photos.split(",").map((photo) => (
                 <CarouselItem
-                  key={photo.id}
+                  key={photo}
                   className="aspect-square max-h-[250px] md:max-h-[100%] "
                 >
                   {/* <Image className="rounded-lg" src="https://placehold.co/600x600.png?text=Nitesh+Babu" width={600} height={600} /> */}
@@ -64,7 +48,7 @@ export async function Card({
                     src={`https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${photo}`}
                     loading="lazy"
                     fill
-                    alt={photo.id}
+                    alt={photo}
                   />
                 </CarouselItem>
               ))}

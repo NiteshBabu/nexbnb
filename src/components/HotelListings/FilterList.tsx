@@ -33,29 +33,33 @@ function FilterList() {
     [searchParams]
   )
   return (
-    <Scroller className="my-5 no-scrollbar container">
-      {filterList.map((filterIcon) => (
-        <ScrollItem key={filterIcon.id}>
-          <Link
-            key={filterIcon.id}
-            href={
-              pathname + '?' + createQueryString('category', filterIcon.name)
-            }
-            className={cn(
-              search === filterIcon.name
-                ? 'border-b-2 border-black pb-2 flex-shrink-0'
-                : 'opacity-70 flex-shrink-0',
-              'flex flex-col gap-y-3 items-center'
-            )}
-          >
-            <div className="relative w-5 h-5">
-              <Icon icon={filterIcon.icon} className="h-5 w-5" />
-            </div>
-            <small className="text-[13px] text-center">{filterIcon.title}</small>
-          </Link>
-        </ScrollItem>
-      ))}
-    </Scroller>
+    <div className="sticky top-[91px] z-50 ">
+      <Scroller className="py-5 no-scrollbar container bg-white">
+        {filterList.map((filterIcon) => (
+          <ScrollItem key={filterIcon.id}>
+            <Link
+              key={filterIcon.id}
+              href={
+                pathname + '?' + createQueryString('category', filterIcon.name)
+              }
+              className={cn(
+                search === filterIcon.name
+                  ? 'border-b-2 border-black pb-2 flex-shrink-0'
+                  : 'opacity-70 flex-shrink-0',
+                'flex flex-col gap-y-3 items-center'
+              )}
+            >
+              <div className="relative w-5 h-5">
+                <Icon icon={filterIcon.icon} className="h-5 w-5" />
+              </div>
+              <small className="text-[13px] text-center">
+                {filterIcon.title}
+              </small>
+            </Link>
+          </ScrollItem>
+        ))}
+      </Scroller>
+    </div>
   )
 }
 

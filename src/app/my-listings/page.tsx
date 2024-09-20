@@ -21,7 +21,6 @@ export default async function MyListings() {
     },
   })
 
-  let formattedHomes = homes.map((home) => ({ ...home, photos: [home.photo] }))
 
   return (
     <section className="container my-5">
@@ -29,11 +28,11 @@ export default async function MyListings() {
         My Listings
       </h2>
 
-      {!formattedHomes.length ? (
+      {!homes.length ? (
         <NoItem title='No Home In Your Listings' description='Please create some first' />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
-          {formattedHomes.map((home) => (
+          {homes.map((home) => (
             <Card home={home} />
           ))}
         </div>

@@ -5,11 +5,23 @@ import { getHotelsListings } from '@/lib/getHotelListings'
 import { NoItem } from '../NoItem'
 import { Suspense } from 'react'
 
-async function HotelListings({ category, per_page, page_no }) {
-  let { hotels, totalPage } = await getHotelsListings(
+async function HotelListings({
+  category,
+  per_page,
+  page_no,
+  country,
+  guests,
+  bedrooms,
+  bathrooms,
+}) {
+  const { hotels, totalPage } = await getHotelsListings(
     category,
     per_page,
-    page_no
+    page_no,
+    country,
+    guests,
+    bedrooms,
+    bathrooms
   )
 
   if (hotels.length <= 0) {

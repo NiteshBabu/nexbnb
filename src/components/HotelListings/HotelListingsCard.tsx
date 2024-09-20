@@ -20,30 +20,20 @@ import { Skeleton } from '../ui/skeleton'
 import { getBlurredUrl } from '@/lib/getImages'
 import Link from 'next/link'
 
-export async function Card({
-  hotel,
-  isFetching,
-}: {
-  hotel: IHotel
-  isFetching: boolean
-}) {
-  // const imagesWithBlurData = await getBlurredUrl([hotel.pictures.contextual[0]])
-  // hotel.pictures.contextual[0] = imagesWithBlurData[0]
-  if (isFetching) {
-    return (
-      <div className="flex flex-col h-full w-full">
-        <Skeleton className="w-full h-[250px]" />
-
-        <div className="flex justify-between py-2">
-          <Skeleton className="w-9/12 h-5" />
-          <Skeleton className="w-2/12 h-5" />
-        </div>
-        <Skeleton className="w-full h-10 my-1" />
-        <Skeleton className="w-1/3 h-5 my-1" />
-      </div>
-    )
-  }
+export async function Card({ hotel }: { hotel: IHotel }) {
+  // const photos = hotel.photos.split(',')
+  // const imagesWithBlurData = await getBlurredUrl([{url : photos[0]}])
+  // hotel.photos = [{
+  //   url : imagesWithBlurData[0].url,
+  //   blurredDataUrl : imagesWithBlurData[0].blurredDataUrl
+  // }]
+  // console.log(hotel);
   
+  if (typeof hotel.photos === "string"){
+    
+    hotel.photos = hotel.photos.split(",")
+  }
+    
   return (
     <BaseCard className="border-none shadow-none w-full">
       <CardContent className="p-0 pb-4 relative ">
@@ -57,7 +47,7 @@ export async function Card({
         <Carousel className="w-full" orientation="horizontal">
           <CarouselContent>
             {/* <Image className="rounded-lg" src="https://placehold.co/600x600.png?text=Nitesh+Babu" width={600} height={600} /> */}
-         
+
             {hotel.photos.map((pic) => (
               <CarouselItem
                 key={pic.id}
@@ -77,7 +67,7 @@ export async function Card({
                 ) : (
                   <Image
                     className="rounded-xl w-full  object-cover aspect-square"
-                    src={pic}
+                    src={pic.startsWith("http")? pic : `https://vsrkqzplyltvsnlliazh.supabase.co/storage/v1/object/public/nexbnb/${pic}`}
                     height={350}
                     width={350}
                     loading="lazy"
@@ -93,9 +83,9 @@ export async function Card({
       </CardContent>
       <Link href={`/listings/${hotel.id}`}>
         <CardTitle className="py-1 flex justify-between align-middle flex-wrap gap-2">
-          <span className="w-9/12">{hotel.name}</span>
+          <span className="w-9/12">{hotel.name || hotel.title}</span>
           <span>
-            {(Math.random() * 5).toPrecision(2)}
+            {hotel.rating || (Math.random() * 3 + 2).toFixed(1)}
             <StarIcon
               className="w-5 inline -mt-1 "
               fill="hotpink"
@@ -105,14 +95,15 @@ export async function Card({
         </CardTitle>
         <CardDescription className="p-0">
           {hotel.country}
-          {hotel.location?.code} kilometres away
-          <br></br>
-          {formatDate(hotel.context?.checkin)} -{' '}
-          {formatDate(hotel.context?.checkout)}
+          {hotel.location?.code}
+          <br />
+          {/* {(Math.random() * 1000).toFixed()} kilometres away */}
+          {/* {formatDate(hotel.context?.checkin)} -{' '}
+          {formatDate(hotel.context?.checkout)} */}
         </CardDescription>
         <CardFooter className="p-0 pt-1">
           <p>
-            <span className="font-semibold">{hotel.price}</span> night
+            <span className="font-semibold">${hotel.price}</span>/night
           </p>
         </CardFooter>
       </Link>

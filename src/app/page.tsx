@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function Home({
-  searchParams: { category, per_page, page_no },
+  searchParams: { category, per_page, page_no, country, guests, bedrooms, bathrooms },
 }: Props) {
   return (
     <>
@@ -16,6 +16,10 @@ export default function Home({
           category={category || 'all'}
           per_page={per_page || 8}
           page_no={page_no || 1}
+          country={country}
+          guests={guests}
+          bedrooms={bedrooms}
+          bathrooms={bathrooms}
         />
       </div>
     </>

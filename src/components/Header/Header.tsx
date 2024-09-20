@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import ProfileMenu from './ProfileMenu'
 import Image from 'next/image'
-
+import {SearchComponent} from  "../SearchComponent"
 type Props = {}
 
 const Header = (props: Props) => {
   return (
-    <header className="">
-      <nav className="w-full border-b">
+    <header className="border-b sticky top-0 z-50 bg-white">
+      <nav className="w-full">
         <div className="flex items-center justify-between container mx-auto px-5 lg:px-10 py-5">
             <Link href="/" className="flex items-center gap-2">
               <Image
@@ -21,6 +21,7 @@ const Header = (props: Props) => {
                 nexbnb
               </p>
             </Link>
+            <SearchComponent />
           <ProfileMenu />
         </div>
       </nav>
